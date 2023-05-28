@@ -16,6 +16,12 @@ class CharacterRandomizerPageRouletteBloc extends Bloc<
       emit(CharacterRandomizerPageRouletteRoulettedState(
           charactersSorted: charactersSorted));
     });
+
+    on<CharacterRandomizerPageRouletteSetRouletesSucessfullEvent>(
+        (event, emit) {
+      emit(CharacterRandomizerPageRouletteRoulettedSucessfullState(
+          charactersSorted: event.charactersSorted));
+    });
   }
 }
 
@@ -36,6 +42,14 @@ class CharacterRandomizerPageRouletteRoulettedState
       {required this.charactersSorted});
 }
 
+class CharacterRandomizerPageRouletteRoulettedSucessfullState
+    extends CharacterRandomizerPageRouletteState {
+  List<CharacterModel> charactersSorted;
+
+  CharacterRandomizerPageRouletteRoulettedSucessfullState(
+      {required this.charactersSorted});
+}
+
 abstract class CharacterRandomizerPageRouletteEvent {}
 
 class CharacterRandomizerPageRouletteSetRouletesEvent
@@ -50,4 +64,12 @@ class CharacterRandomizerPageRouletteSetRouletesEvent
       {required this.numberOfCharacters,
       required this.typeOfSearch,
       required this.charactersSelected});
+}
+
+class CharacterRandomizerPageRouletteSetRouletesSucessfullEvent
+    extends CharacterRandomizerPageRouletteEvent {
+  List<CharacterModel> charactersSorted;
+
+  CharacterRandomizerPageRouletteSetRouletesSucessfullEvent(
+      {required this.charactersSorted});
 }

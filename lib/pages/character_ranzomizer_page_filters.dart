@@ -46,27 +46,39 @@ class CharacterRandomizerPageFilterWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Row(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        alignment: WrapAlignment.start,
+        runAlignment: WrapAlignment.start,
         children: [
-          const Text("Buscar: "),
-          DropdownMenu<int?>(
-            initialSelection: 1,
-            controller: characterSelectionNumberController,
-            dropdownMenuEntries: characterSelecionNumberEntries,
-          ),
           const Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Text("Agrupado por: "),
-          ),
-          DropdownMenu<int?>(
-            initialSelection: 1,
-            enableSearch: false,
-            enableFilter: false,
-            controller: characterSelectionGroupTypeController,
-            dropdownMenuEntries: characterSelecionGroupTypeEntries,
+            padding: EdgeInsets.all(8.0),
+            child: Text("Buscar: "),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 16),
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownMenu<int?>(
+              initialSelection: 1,
+              controller: characterSelectionNumberController,
+              dropdownMenuEntries: characterSelecionNumberEntries,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text("Agrupado por: "),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownMenu<int?>(
+              initialSelection: 1,
+              enableSearch: false,
+              enableFilter: false,
+              controller: characterSelectionGroupTypeController,
+              dropdownMenuEntries: characterSelecionGroupTypeEntries,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () => roulette(),
               child: const Text("Roletar"),

@@ -7,6 +7,7 @@ import 'package:valorant_randomizer/services/theme_service.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
+
 void main() {
   runApp(const MainApp());
 }
@@ -94,4 +95,6 @@ class _MainAppState extends State<MainApp> {
       ),
     );
   }
+
+ 
 }

@@ -17,9 +17,7 @@ class CharacterRandomizerPageAllCharactersWidget extends StatelessWidget {
 
     return Column(children: [
       Row(
-        children: getClassTypeCards(
-          bloc,
-        ),
+        children: getClassTypeCards(bloc, context),
       ),
       BlocBuilder<CharacterRandomizerPageBloc, CharacterRandomizerPageState>(
         bloc: bloc,
@@ -34,16 +32,14 @@ class CharacterRandomizerPageAllCharactersWidget extends StatelessWidget {
   }
 
   List<Widget> getClassTypeCards(
-    CharacterRandomizerPageBloc bloc,
-  ) {
-    List<Widget> widgets = getClassTypeCard(CharacterClass.values, bloc);
+      CharacterRandomizerPageBloc bloc, BuildContext context) {
+    List<Widget> widgets =
+        getClassTypeCard(CharacterClass.values, bloc, context);
     return widgets;
   }
 
-  List<Widget> getClassTypeCard(
-    List<CharacterClass> characterClasses,
-    CharacterRandomizerPageBloc bloc,
-  ) {
+  List<Widget> getClassTypeCard(List<CharacterClass> characterClasses,
+      CharacterRandomizerPageBloc bloc, BuildContext context) {
     List<Widget> widgets = [];
     for (CharacterClass characterClass in characterClasses) {
       Widget widget = Expanded(
@@ -83,7 +79,7 @@ class CharacterRandomizerPageAllCharactersWidget extends StatelessWidget {
                         },
                         child: Image.asset(
                           'assets/class_type/${characterClass.name}.png',
-                          height: 50,
+                          height: MediaQuery.of(context).size.height / 20,
                         ),
                       ),
                     ),
@@ -109,14 +105,17 @@ class CharacterRandomizerPageAllCharactersWidget extends StatelessWidget {
     for (CharacterClass characterClass in characterClasses) {
       Widget widget = Expanded(
         child: SizedBox(
-          width: MediaQuery.of(context).size.width / 6,
+          width: MediaQuery.of(context).size.width / 4,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Wrap(
+                alignment: WrapAlignment.start,
+                crossAxisAlignment: WrapCrossAlignment.start,
                 children: getCardsFromCharacters(
                     getCharactersModelFromList(characterClass, characters),
-                    bloc),
+                    bloc,
+                    context),
               ),
             ],
           ),
@@ -135,8 +134,8 @@ class CharacterRandomizerPageAllCharactersWidget extends StatelessWidget {
         .toList();
   }
 
-  List<Widget> getCardsFromCharacters(
-      List<CharacterModel> characters, CharacterRandomizerPageBloc bloc) {
+  List<Widget> getCardsFromCharacters(List<CharacterModel> characters,
+      CharacterRandomizerPageBloc bloc, BuildContext context) {
     List<Widget> widgets = [];
     for (var character in characters) {
       double opacity = 1;
@@ -152,7 +151,7 @@ class CharacterRandomizerPageAllCharactersWidget extends StatelessWidget {
           child: Opacity(
             opacity: opacity,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(4.0),
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -164,7 +163,7 @@ class CharacterRandomizerPageAllCharactersWidget extends StatelessWidget {
                   children: [
                     Image.asset(
                       'assets/character_icons/${character.id}.png',
-                      height: 50,
+                      height: MediaQuery.of(context).size.height / 25,
                     ),
                   ],
                 ),
