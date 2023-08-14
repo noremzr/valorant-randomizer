@@ -34,8 +34,11 @@ class CharacterRandomizerPageWidget extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              CharacterRandomizerPageAllCharactersWidget(characters: characters),
-              const BannerAdUnit(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: CharacterRandomizerPageAllCharactersWidget(characters: characters),
+              ),
+              // const BannerAdUnit(),
             ],
           ),
           

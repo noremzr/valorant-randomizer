@@ -12,6 +12,7 @@ class CharacterRepository{
       CharacterModel(id: "brimstone", name: "Brimstone", classType: CharacterClass.controller),
       CharacterModel(id: "chamber", name: "Chamber", classType: CharacterClass.sentinel),
       CharacterModel(id: "cypher", name: "Cypher", classType: CharacterClass.sentinel),
+      CharacterModel(id: "deadlock", name: "Deadlock", classType: CharacterClass.sentinel),
       CharacterModel(id: "fade", name: "Fade", classType: CharacterClass.initiator),
       CharacterModel(id: "gekko", name: "Gekko", classType: CharacterClass.initiator),
       CharacterModel(id: "harbor", name: "Harbor", classType: CharacterClass.controller),
