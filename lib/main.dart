@@ -40,6 +40,10 @@ class _MainAppState extends State<MainApp> {
     html.window.open('https://twitch.tv/noremz', "_blank");
   }
 
+  Future<void> abrirURLCoffee() async {
+    html.window.open('https://www.buymeacoffee.com/noremz', "_blank");
+  }
+
   @override
   Widget build(BuildContext context) {
     final ButtonStyle style = TextButton.styleFrom(
@@ -63,8 +67,17 @@ class _MainAppState extends State<MainApp> {
                     abrirURL();
                   },
                   icon: Image.asset("assets/images/twitch-logo.png"),
-                  iconSize: 100,
-                  splashRadius: 25,
+                  iconSize: 50,
+                  splashRadius: 15,
+                ),
+                IconButton(
+                  style: style,
+                  onPressed: () {
+                    abrirURLCoffee();
+                  },
+                  icon: Image.asset("assets/images/buy-me-coffee.png"),
+                  iconSize: 150,
+                  splashRadius: 15,
                 ),
                 IconButton(
                   style: style,
