@@ -9,6 +9,7 @@ class CharacterRandomizerPageRouletteBloc extends Bloc<
   CharacterRandomizerPageRouletteBloc()
       : super(CharacterRandomizerPageRouletteInitialState()) {
     on<CharacterRandomizerPageRouletteSetRouletesEvent>((event, emit) {
+      if (state is CharacterRandomizerPageRouletteRoulettedState) return;
       List<CharacterModel> charactersSorted =
           CharacterService.getCharactersByFilter(event.numberOfCharacters,
               event.typeOfSearch, event.charactersSelected);
