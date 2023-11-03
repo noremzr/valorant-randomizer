@@ -7,7 +7,6 @@ import 'package:valorant_randomizer/services/theme_service.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
-
 void main() {
   runApp(const MainApp());
 }
@@ -38,7 +37,7 @@ class _MainAppState extends State<MainApp> {
   }
 
   Future<void> abrirURL() async {
-    html.window.open('https://twitch.tv/noremz',"_blank");
+    html.window.open('https://twitch.tv/noremz', "_blank");
   }
 
   @override
@@ -56,7 +55,7 @@ class _MainAppState extends State<MainApp> {
           color: Colors.red,
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('Randomizador de personagens'),
+              title: const Text('Randomizador'),
               actions: <Widget>[
                 IconButton(
                   style: style,
@@ -82,11 +81,16 @@ class _MainAppState extends State<MainApp> {
               ],
             ),
             body: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/background/background.png"),
-                    opacity: 0.3,
-                    fit: BoxFit.cover),
+                  isAntiAlias: true,
+                  image: const AssetImage("assets/background/background.png"),
+                  colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.2),
+                    BlendMode.dstATop,
+                  ),
+                  fit: BoxFit.cover,
+                ),
               ),
               child: const CharacterRandomizerPageWidget(),
             ),
@@ -95,6 +99,4 @@ class _MainAppState extends State<MainApp> {
       ),
     );
   }
-
- 
 }

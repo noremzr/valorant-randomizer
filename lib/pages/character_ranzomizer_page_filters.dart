@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:valorant_randomizer/components/custom_padding_widget.dart';
+import 'package:valorant_randomizer/components/grouped_by_widget.dart';
 import 'package:valorant_randomizer/models/character_model.dart';
 
 import '../blocs/character_randomizer/character_randomizer_page_roulette_bloc.dart';
@@ -11,6 +13,8 @@ class CharacterRandomizerPageFilterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double scaleW = MediaQuery.of(context).size.width / 1920;
+    double scaleH = MediaQuery.of(context).size.height / 1080;
     final CharacterRandomizerPageRouletteBloc rouletteBloc =
         context.read<CharacterRandomizerPageRouletteBloc>();
     final List<DropdownMenuEntry<int?>> characterSelecionNumberEntries =
@@ -31,8 +35,20 @@ class CharacterRandomizerPageFilterWidget extends StatelessWidget {
         TextEditingController();
 
     characterSelecionGroupTypeEntries.addAll([
-      const DropdownMenuEntry<int>(value: 1, label: "Selecionados"),
-      const DropdownMenuEntry<int>(value: 2, label: "Classe"),
+      const DropdownMenuEntry<int>(
+        value: 1,
+        label: "Selecionados",
+        style: ButtonStyle(
+          padding: MaterialStatePropertyAll(EdgeInsets.zero),
+        ),
+      ),
+      const DropdownMenuEntry<int>(
+        value: 2,
+        label: "Classe",
+        style: ButtonStyle(
+          padding: MaterialStatePropertyAll(EdgeInsets.zero),
+        ),
+      ),
     ]);
 
     void roulette() {
@@ -45,40 +61,30 @@ class CharacterRandomizerPageFilterWidget extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: 8.0 * scaleW,
+        vertical: 8.0 * scaleH,
+      ),
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.center,
         alignment: WrapAlignment.start,
         runAlignment: WrapAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          const CustomPaddingWidget(
             child: Text("Buscar: "),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          CustomPaddingWidget(
             child: DropdownMenu<int?>(
               initialSelection: 1,
               controller: characterSelectionNumberController,
               dropdownMenuEntries: characterSelecionNumberEntries,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text("Agrupado por: "),
+          GroupedByWidget(
+            items: characterSelecionGroupTypeEntries,
+            controller: characterSelectionGroupTypeController,
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: DropdownMenu<int?>(
-              initialSelection: 1,
-              enableSearch: false,
-              enableFilter: false,
-              controller: characterSelectionGroupTypeController,
-              dropdownMenuEntries: characterSelecionGroupTypeEntries,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          CustomPaddingWidget(
             child: ElevatedButton(
               onPressed: () => roulette(),
               child: const Text("Roletar"),

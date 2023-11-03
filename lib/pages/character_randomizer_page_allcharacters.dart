@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:valorant_randomizer/components/custom_padding_widget.dart';
 
 import '../blocs/character_randomizer/character_randomizer_page_bloc.dart';
 import '../enums/character_class_enum.dart';
@@ -53,8 +54,7 @@ class CharacterRandomizerPageAllCharactersWidget extends StatelessWidget {
                 0.0, 0.0, -1.0, 0.0, 255.0, //
                 0.0, 0.0, 0.0, 1.0, 0.0, //
               ])),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+              child: CustomPaddingWidget(
                 child: Column(
                   children: [
                     MouseRegion(
@@ -104,20 +104,23 @@ class CharacterRandomizerPageAllCharactersWidget extends StatelessWidget {
 
     for (CharacterClass characterClass in characterClasses) {
       Widget widget = Expanded(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width / 4,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Wrap(
-                alignment: WrapAlignment.start,
-                crossAxisAlignment: WrapCrossAlignment.start,
-                children: getCardsFromCharacters(
-                    getCharactersModelFromList(characterClass, characters),
-                    bloc,
-                    context),
-              ),
-            ],
+        child: Tooltip(
+          message: characterClass.name,
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width / 4,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Wrap(
+                  alignment: WrapAlignment.start,
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  children: getCardsFromCharacters(
+                      getCharactersModelFromList(characterClass, characters),
+                      bloc,
+                      context),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -142,30 +145,34 @@ class CharacterRandomizerPageAllCharactersWidget extends StatelessWidget {
       if (!character.selected) {
         opacity = 0.3;
       }
-      Widget card = MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: () => bloc.add(
-            CharacterRandomizerPageSetSelectedEvent(characterId: character.id),
-          ),
-          child: Opacity(
-            opacity: opacity,
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/character_icons/${character.id}.png',
-                      height: MediaQuery.of(context).size.height / 25,
+      Widget card = Tooltip(
+        message: character.name,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () => bloc.add(
+              CharacterRandomizerPageSetSelectedEvent(
+                  characterId: character.id),
+            ),
+            child: Opacity(
+              opacity: opacity,
+              child: CustomPaddingWidget(
+                basePadding: 4.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey,
+                      width: 1,
                     ),
-                  ],
+                  ),
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'assets/character_icons/${character.id}.png',
+                        height: MediaQuery.of(context).size.height / 25,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
