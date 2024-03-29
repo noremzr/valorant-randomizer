@@ -27,6 +27,11 @@ class CharacterRepository {
         classType: CharacterClass.sentinel,
       ),
       CharacterModel(
+        id: "clove",
+        name: "Clove",
+        classType: CharacterClass.controller,
+      ),
+      CharacterModel(
         id: "cypher",
         name: "Cypher",
         classType: CharacterClass.sentinel,
